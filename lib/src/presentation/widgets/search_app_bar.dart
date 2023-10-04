@@ -97,12 +97,14 @@ class _SearchAppBarState extends State<SearchAppBar> {
                     ),
                     onPressed: () => Navigator.pop(context),
                   ),
-                Text(
-                  title,
-                  style: textTheme.titleLarge?.copyWith(color: Colors.white),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: textTheme.titleLarge?.copyWith(color: Colors.white),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                if (searchEnabled) ...[
-                  const Spacer(),
+                if (searchEnabled)
                   IconButton(
                     icon: const Icon(
                       Icons.search,
@@ -110,7 +112,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
                     ),
                     onPressed: _onOpenQuery,
                   ),
-                ],
                 ...extraActions,
               ],
             ),
