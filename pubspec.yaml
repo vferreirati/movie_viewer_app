@@ -19,6 +19,7 @@ dependencies:
   rxdart: ^0.27.7
   awesome_dio_interceptor: ^1.0.0
   very_good_infinite_list: ^0.7.1
+  go_router: ^11.1.2
 
 dev_dependencies:
   flutter_test:

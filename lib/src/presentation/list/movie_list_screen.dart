@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
@@ -106,7 +107,10 @@ class _MoviesContent extends StatelessWidget {
             Icons.chevron_right_rounded,
             color: Theme.of(context).dividerColor,
           ),
-          onTap: () {},
+          onTap: () => context.push(
+            '/details',
+            extra: movie,
+          ),
         );
       },
     );
