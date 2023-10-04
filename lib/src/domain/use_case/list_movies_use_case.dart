@@ -1,7 +1,8 @@
 import '../model/movie.dart';
 import '../repository/movie_repository.dart';
 
-/// Use case responsible for fetching a list of [Movies] based on the provided parameters
+/// Use case responsible for fetching a list of [Movies] based on the provided
+/// parameters
 class ListMoviesUseCase {
   final MovieRepository _repository;
 

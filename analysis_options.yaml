@@ -5,3 +5,4 @@ linter:
     avoid_print: true
     prefer_single_quotes: true
     prefer_relative_imports: true
+    lines_longer_than_80_chars: true
