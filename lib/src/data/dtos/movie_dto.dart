@@ -8,7 +8,7 @@ class MovieDTO {
 
   /// Path of the image poster of this movie
   ///
-  /// Is not a complete URL.
+  /// It is not a complete URL.
   final String? posterPath;
 
   /// The average score of this movie.
