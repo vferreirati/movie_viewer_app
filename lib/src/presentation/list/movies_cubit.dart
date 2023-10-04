@@ -115,7 +115,8 @@ class MoviesCubit extends Cubit<MoviesState> {
   ///
   /// Use the `query` parameter to query the data.
   ///
-  /// Use the `nextPage` parameter to signal that a new page of data should be loaded.
+  /// Use the `nextPage` parameter to signal that a new page of data
+  /// should be loaded.
   /// Defaulst to `false`.
   Future<void> listMovies({
     String query = '',
