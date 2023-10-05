@@ -79,13 +79,11 @@ class _MoviesContent extends StatelessWidget {
       emptyBuilder: (context) => const Center(
         child: Text('No results'),
       ),
-      errorBuilder: (context) => Center(
-        child: ErrorIndicator(
-          onRetry: () => context.read<MoviesCubit>().listMovies(
-                query: state.query,
-              ),
-          message: errorMessage!,
-        ),
+      errorBuilder: (context) => ErrorIndicator(
+        onRetry: () => context.read<MoviesCubit>().listMovies(
+              query: state.query,
+            ),
+        message: errorMessage!,
       ),
       separatorBuilder: (context, index) => const Divider(),
       loadingBuilder: (context) => const LinearProgressIndicator(),
@@ -98,8 +96,9 @@ class _MoviesContent extends StatelessWidget {
               ? Hero(
                   tag: movie.posterURL,
                   child: CircleAvatar(
-                    backgroundImage:
-                        CachedNetworkImageProvider(movie.posterURL),
+                    backgroundImage: CachedNetworkImageProvider(
+                      movie.posterURL,
+                    ),
                   ),
                 )
               : null,

@@ -47,7 +47,10 @@ class MoviePosterScoreWrapper extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: MovieScoreIndicator(score: score),
+              child: MovieScoreIndicator(
+                score: score,
+                radius: radius,
+              ),
             ),
           ),
         )
