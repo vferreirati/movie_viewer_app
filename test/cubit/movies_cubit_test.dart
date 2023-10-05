@@ -140,7 +140,7 @@ void main() {
     );
 
     blocTest<MoviesCubit, MoviesState>(
-      'Fetches the initial list of movies successfully and correctly sets canLoadMore',
+      'Fetches the initial list of movies successfully and sets canLoadMore',
       setUp: () {
         when(
           () => _listMoviesUseCase(
@@ -253,7 +253,7 @@ void main() {
     );
 
     blocTest<MoviesCubit, MoviesState>(
-      'Fetches the next page of movies successfully and correctly sets pagination',
+      'Fetches the next page of movies successfully and sets pagination',
       seed: () => MoviesState(
         pagination: const Pagination(size: 20),
         movies: movies.take(5),
@@ -295,7 +295,7 @@ void main() {
     );
 
     blocTest<MoviesCubit, MoviesState>(
-      'Queries the next page of movies successfully and correctly sets pagination',
+      'Queries the next page of movies successfully and sets pagination',
       seed: () => MoviesState(
         pagination: const Pagination(size: 20),
         movies: movies.take(5),
@@ -344,7 +344,7 @@ void main() {
     const filter = MovieFilter.nowPlaying;
 
     blocTest<MoviesCubit, MoviesState>(
-      'Sets the filter correctly and reloads the list of data using the correct filter',
+      'Sets the filter correctly and reloads the data using the filter',
       setUp: () {
         when(
           () => _listMoviesUseCase(
