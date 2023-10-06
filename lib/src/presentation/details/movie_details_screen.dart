@@ -20,8 +20,6 @@ class MovieDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: SearchAppBar(
         title: movie.title,
-        onSearchChanged: (value) {},
-        searchEnabled: false,
         showBackButton: true,
       ),
       body: SingleChildScrollView(
@@ -34,6 +32,14 @@ class MovieDetailsScreen extends StatelessWidget {
               MoviePosterScoreWrapper(
                 score: movie.score,
                 url: movie.posterURL,
+              ),
+              const SizedBox(height: 12.0),
+              Text(
+                movie.releaseDate,
+                style: textTheme.bodyLarge?.copyWith(
+                  color: AppColor.primary,
+                  height: 1.8,
+                ),
               ),
               const SizedBox(height: 12.0),
               Text(

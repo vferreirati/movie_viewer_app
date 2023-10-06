@@ -14,12 +14,16 @@ class MovieDTO {
   /// The average score of this movie.
   final double? voteAverage;
 
+  /// The release date of the movie.
+  final String? releaseDate;
+
   /// Creates a new [MovieDTO] instance.
   MovieDTO({
     this.title,
     this.overview,
     this.voteAverage,
     this.posterPath,
+    this.releaseDate,
   });
 
   /// Maps the instance into a JSON map.
@@ -29,6 +33,7 @@ class MovieDTO {
       'overview': overview,
       'vote_average': voteAverage,
       'poster_path': posterPath,
+      'release_date': posterPath,
     };
   }
 
@@ -39,6 +44,7 @@ class MovieDTO {
       overview: map['overview'],
       posterPath: map['poster_path'],
       voteAverage: map['vote_average']?.toDouble(),
+      releaseDate: map['release_date'],
     );
   }
 }

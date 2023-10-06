@@ -11,5 +11,6 @@ extension MovieDTOMapping on MovieDTO {
         posterURL:
             posterPath == null ? '' : '${Constants.imageBaseUrl}$posterPath',
         score: voteAverage ?? 0.0,
+        releaseDate: releaseDate ?? '',
       );
 }

@@ -14,12 +14,16 @@ class Movie extends Equatable {
   /// The rating score of the movie
   final double score;
 
+  /// The release date of the movie
+  final String releaseDate;
+
   /// Creates a new [Movie] instance.
   const Movie({
     this.title = '',
     this.description = '',
     this.posterURL = '',
     this.score = 0.0,
+    this.releaseDate = '',
   });
 
   /// Creates a new instance with the provided parameters
@@ -28,12 +32,14 @@ class Movie extends Equatable {
     String? description,
     String? posterURL,
     double? score,
+    String? releaseDate,
   }) {
     return Movie(
       title: title ?? this.title,
       description: description ?? this.description,
       posterURL: posterURL ?? this.posterURL,
       score: score ?? this.score,
+      releaseDate: releaseDate ?? this.releaseDate,
     );
   }
 
@@ -43,5 +49,6 @@ class Movie extends Equatable {
         description,
         posterURL,
         score,
+        releaseDate,
       ];
 }

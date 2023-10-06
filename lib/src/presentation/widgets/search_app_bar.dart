@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -5,19 +7,17 @@ import '../../common/app_color.dart';
 
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
-  final ValueChanged<String> onSearchChanged;
+  final ValueChanged<String>? onSearchChanged;
   final double height;
   final bool showBackButton;
-  final bool searchEnabled;
   final List<Widget> extraActions;
 
   const SearchAppBar({
     super.key,
     required this.title,
-    required this.onSearchChanged,
+    this.onSearchChanged,
     this.height = 90.0,
     this.showBackButton = false,
-    this.searchEnabled = true,
     this.extraActions = const [],
   });
 
@@ -30,23 +30,21 @@ class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _SearchAppBarState extends State<SearchAppBar> {
   String get title => widget.title;
-  ValueChanged<String> get onSearchChanged => widget.onSearchChanged;
+  ValueChanged<String>? get onSearchChanged => widget.onSearchChanged;
   double get height => widget.height;
-  bool get searchEnabled => widget.searchEnabled;
   bool get showBackButton => widget.showBackButton;
   List<Widget> get extraActions => widget.extraActions;
 
   final queryController = TextEditingController();
   final queryFocusNode = FocusNode();
-  final _querySubject = BehaviorSubject<String>();
+  final _controller = StreamController<String>();
+  Timer? _debounceTimer;
 
   bool isSearching = false;
 
   @override
   void initState() {
-    _querySubject
-        .debounceTime(const Duration(milliseconds: 500))
-        .listen(onSearchChanged);
+    _controller.stream.listen(_onQueryChanged);
     super.initState();
   }
 
@@ -67,7 +65,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
           ? TextField(
               focusNode: queryFocusNode,
               controller: queryController,
-              onChanged: _querySubject.add,
+              onChanged: _controller.add,
               decoration: InputDecoration(
                 border: InputBorder.none,
                 suffix: IconButton(
@@ -104,7 +102,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                if (searchEnabled)
+                if (onSearchChanged != null)
                   IconButton(
                     icon: const Icon(
                       Icons.search,
@@ -122,7 +120,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
   void dispose() {
     queryController.dispose();
     queryFocusNode.dispose();
-    _querySubject.close();
+    _controller.close();
     super.dispose();
   }
 
@@ -138,6 +136,15 @@ class _SearchAppBarState extends State<SearchAppBar> {
       isSearching = false;
     });
     queryController.clear();
-    onSearchChanged('');
+    onSearchChanged?.call('');
+  }
+
+  void _onQueryChanged(String query) async {
+    _debounceTimer?.cancel();
+    _debounceTimer = null;
+
+    _debounceTimer = Timer(const Duration(seconds: 2), () {
+      onSearchChanged?.call(query);
+    });
   }
 }

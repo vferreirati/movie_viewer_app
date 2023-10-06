@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:very_good_infinite_list/very_good_infinite_list.dart';
 
+import '../../common/app_color.dart';
 import '../../domain/model/movie_filter.dart';
 import '../extensions/movie_error_ui_extension.dart';
 import '../extensions/movie_filter_ui_extension.dart';
@@ -85,7 +86,17 @@ class _MoviesContent extends StatelessWidget {
             ),
         message: errorMessage!,
       ),
-      separatorBuilder: (context, index) => const Divider(),
+      separatorBuilder: (context, index) {
+        final effectiveIndex = index + 1;
+        final shouldAddBox = index > 0 && effectiveIndex % 5 == 0;
+
+        return shouldAddBox
+            ? Container(
+                height: 50.0,
+                color: AppColor.primary,
+              )
+            : const Divider();
+      },
       loadingBuilder: (context) => const LinearProgressIndicator(),
       itemBuilder: (context, index) {
         final movie = movies[index];
@@ -105,6 +116,9 @@ class _MoviesContent extends StatelessWidget {
           trailing: Icon(
             Icons.chevron_right_rounded,
             color: Theme.of(context).dividerColor,
+          ),
+          subtitle: Text(
+            movie.releaseDate,
           ),
           onTap: () => context.push(
             '/details',
